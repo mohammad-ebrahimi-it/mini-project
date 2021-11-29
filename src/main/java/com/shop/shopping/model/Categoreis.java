@@ -1,18 +1,23 @@
-package com.shop.shopping.services;
+package com.shop.shopping.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Categoreis {
 
     private Long id;
     private String title;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private Set<Posts> posts = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,15 @@ public class Categoreis {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @ManyToMany(mappedBy = "categoreis")
+    public Set<Posts> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Posts> posts) {
+        this.posts = posts;
     }
 
     public String getTitle() {
