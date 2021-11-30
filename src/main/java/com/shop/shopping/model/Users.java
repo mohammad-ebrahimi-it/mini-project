@@ -2,6 +2,7 @@ package com.shop.shopping.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +23,19 @@ public class Users {
     private String cover;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Users(Long id, String firstName, String lastName, String email, String password, String cover, Set<Posts> posts) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.cover = cover;
+        this.posts = posts;
+    }
+
+    public Users() {
+    }
 
     private Set<Posts> posts = new HashSet<>();
 
@@ -66,7 +80,6 @@ public class Users {
     }
 
     @NotNull
-    @NotBlank
     @Valid
     public String getEmail() {
         return email;
@@ -110,4 +123,66 @@ public class Users {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public static class UserBuilder {
+
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String password;
+        private String cover;
+
+
+        private Set<Posts> posts = new HashSet<>();
+
+        private UserBuilder() {
+        }
+
+        public static UserBuilder builder() {
+            return new UserBuilder();
+        }
+
+        public UserBuilder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public UserBuilder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public UserBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder setCover(String cover) {
+            this.cover = cover;
+            return this;
+        }
+
+        public UserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder setPost(Set<Posts> posts) {
+            this.posts = posts;
+            return this;
+        }
+
+        public Users build() {
+            return new Users(id, firstName, lastName, email, password, cover, posts);
+        }
+
+
+    }
 }
+
