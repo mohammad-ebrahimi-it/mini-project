@@ -6,10 +6,9 @@ import com.shop.shopping.model.Users;
 import com.shop.shopping.services.services.UserServicesInt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("user")
@@ -22,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public Page<Users> users (Pageable pageable) {
+    public Page<Users> users(Pageable pageable) {
         return userServicesInt.getUser(pageable);
     }
 
@@ -30,6 +29,25 @@ public class UserController {
     public ResponseEntity<UserResponse> addUsers(@RequestBody UserRequest request) {
         Users users = userServicesInt.addUser(request);
         return ResponseEntity.ok(userResponse(users));
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserRequest userRequest) {
+        Users user = userServicesInt.update(userRequest, id);
+        return ResponseEntity.ok(userResponse(user));
+
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<UserResponse> findUser(@PathVariable Long id) {
+        Users users = userServicesInt.findOneUsers(id);
+        return ResponseEntity.ok(userResponse(users));
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<UserResponse> delete(@PathVariable Long id) {
+        userServicesInt.deleteUsers(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     private UserResponse userResponse(Users user) {
