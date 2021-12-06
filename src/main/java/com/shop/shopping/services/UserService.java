@@ -1,20 +1,23 @@
 package com.shop.shopping.services;
 
 import com.shop.shopping.dto.requests.UserRequest;
+import com.shop.shopping.exception.APIException;
 import com.shop.shopping.model.Users;
 import com.shop.shopping.repository.UserRepository;
 import com.shop.shopping.services.services.UserServicesInt;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements UserServicesInt {
 
+    private final MessageSourceAccessor messageSourceAccessor;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(MessageSourceAccessor messageSourceAccessor, UserRepository userRepository) {
+        this.messageSourceAccessor = messageSourceAccessor;
         this.userRepository = userRepository;
     }
 
@@ -49,7 +52,8 @@ public class UserService implements UserServicesInt {
 
     @Override
     public Users findOneUsers(Long id) {
-        return userRepository.findById(id).orElseThrow(RuntimeException::new);
+        return userRepository.findById(id).orElseThrow(
+                () -> new APIException(messageSourceAccessor.getMessage("user.not.found")));
     }
 
     @Override
