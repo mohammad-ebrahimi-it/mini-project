@@ -1,4 +1,4 @@
-package com.shop.shopping;
+package com.shop.shopping.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
