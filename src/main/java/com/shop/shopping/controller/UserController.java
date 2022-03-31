@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserServicesInt userServicesInt;
@@ -20,7 +20,8 @@ public class UserController {
         this.userServicesInt = userServicesInt;
     }
 
-    @GetMapping("/")
+
+    @GetMapping("")
     public Page<Users> users(Pageable pageable) {
         return userServicesInt.getUser(pageable);
     }
