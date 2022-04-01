@@ -2,8 +2,9 @@ package com.shop.shopping.services;
 
 import com.shop.shopping.dto.requests.UserRequest;
 import com.shop.shopping.exception.APIException;
-import com.shop.shopping.model.Role;
-import com.shop.shopping.model.Users;
+import com.shop.shopping.model.role.Roles;
+import com.shop.shopping.model.user.UserBuilder;
+import com.shop.shopping.model.user.Users;
 import com.shop.shopping.repository.*;
 import com.shop.shopping.services.services.UserServicesInt;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +62,7 @@ public class UserService implements UserServicesInt , UserDetailsService {
 
     @Override
     public Users addUser(UserRequest userRequest) {
-        Users users = Users.UserBuilder.builder().setFirstName(userRequest.getFirstName())
+        Users users = UserBuilder.builder().setFirstName(userRequest.getFirstName())
                 .setLastName(userRequest.getLastName())
                 .setEmail(userRequest.getEmail())
                 .setCover(userRequest.getCover())
@@ -99,17 +100,17 @@ public class UserService implements UserServicesInt , UserDetailsService {
     }
 
     @Override
-    public Role savaRole(Role role) {
-        log.info("Saving new role {} to the database", role.getName());
-        return roleRepository.save(role);
+    public Roles savaRole(Roles roles) {
+        log.info("Saving new roles {} to the database", roles.getName());
+        return roleRepository.save(roles);
     }
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        log.info("Adding role {} to user {} ", roleName, username);
+        log.info("Adding roles {} to user {} ", roleName, username);
         Users user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByName(roleName);
-        user.getRoles().add(role);
+        Roles roles = roleRepository.findByName(roleName);
+        user.getRoles().add(roles);
     }
 
     @Override

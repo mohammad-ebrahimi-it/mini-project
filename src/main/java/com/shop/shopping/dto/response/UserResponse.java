@@ -1,6 +1,6 @@
 package com.shop.shopping.dto.response;
 
-import com.shop.shopping.model.Posts;
+import com.shop.shopping.model.post.Posts;
 
 import java.util.HashSet;
 import java.util.Set;
