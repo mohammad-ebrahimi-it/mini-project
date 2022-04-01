@@ -5,8 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shop.shopping.model.Role;
-import com.shop.shopping.model.Users;
+import com.shop.shopping.model.role.Roles;
+import com.shop.shopping.model.user.Users;
 import com.shop.shopping.services.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -45,8 +45,8 @@ public class UserResource {
     }
 
     @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        return ResponseEntity.created(this.getUri("/api/role/save")).body(userService.savaRole(role));
+    public ResponseEntity<Roles> saveRole(@RequestBody Roles roles) {
+        return ResponseEntity.created(this.getUri("/api/roles/save")).body(userService.savaRole(roles));
     }
 
     @PostMapping("/add/addToUser")
@@ -70,7 +70,7 @@ public class UserResource {
                         .withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
+                        .withClaim("roles", user.getRoles().stream().map(Roles::getName).collect(Collectors.toList()))
                         .sign(algorithm);
 
                 Map<String ,String> tokens = new HashMap<>();

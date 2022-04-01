@@ -1,7 +1,7 @@
 package com.shop.shopping.dto.requests;
 
-import com.shop.shopping.model.Categoreis;
-import com.shop.shopping.model.Users;
+import com.shop.shopping.model.category.Categories;
+import com.shop.shopping.model.user.Users;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,7 @@ public class PostRequest {
     private String cover;
 
     private Users users;
-    private Set<Categoreis> categoreis = new HashSet<>();
+    private Set<Categories> categoreis = new HashSet<>();
 
     public String getTitle() {
         return title;
@@ -37,11 +37,11 @@ public class PostRequest {
         this.users = users;
     }
 
-    public Set<Categoreis> getCategoreis() {
+    public Set<Categories> getCategoreis() {
         return categoreis;
     }
 
-    public void setCategoreis(Set<Categoreis> categoreis) {
+    public void setCategoreis(Set<Categories> categoreis) {
         this.categoreis = categoreis;
     }
 }

@@ -2,7 +2,7 @@ package com.shop.shopping.controller;
 
 import com.shop.shopping.dto.requests.UserRequest;
 import com.shop.shopping.dto.response.UserResponse;
-import com.shop.shopping.model.Users;
+import com.shop.shopping.model.user.Users;
 import com.shop.shopping.services.services.UserServicesInt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
