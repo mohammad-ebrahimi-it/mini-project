@@ -1,7 +1,7 @@
 package com.shop.shopping.dto.response;
 
-import com.shop.shopping.model.Categoreis;
-import com.shop.shopping.model.Users;
+import com.shop.shopping.model.category.Categories;
+import com.shop.shopping.model.user.Users;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -19,13 +19,13 @@ public class PostResponse {
     private LocalDateTime UpdateAt;
 
     private Users users;
-    private Set<Categoreis> categoreis = new HashSet<>();
+    private Set<Categories> categoreis = new HashSet<>();
 
     public PostResponse() {
     }
 
     public PostResponse(Long id, String title, String cover, LocalDateTime createdAt,
-                        LocalDateTime updateAt, Users users, Set<Categoreis> categoreis) {
+                        LocalDateTime updateAt, Users users, Set<Categories> categoreis) {
         this.id = id;
         this.title = title;
         this.cover = cover;
@@ -92,11 +92,11 @@ public class PostResponse {
         this.users = users;
     }
 
-    public Set<Categoreis> getCategoreis() {
+    public Set<Categories> getCategoreis() {
         return categoreis;
     }
 
-    public void setCategoreis(Set<Categoreis> categoreis) {
+    public void setCategoreis(Set<Categories> categoreis) {
         this.categoreis = categoreis;
     }
 
@@ -109,7 +109,7 @@ public class PostResponse {
         private LocalDateTime updatedAt;
 
         private Users users;
-        private Set<Categoreis> categoreis = new HashSet<>();
+        private Set<Categories> categoreis = new HashSet<>();
 
         private PostResponseBuilder() {}
 
@@ -147,7 +147,7 @@ public class PostResponse {
             return this;
         }
 
-        public PostResponseBuilder setCategory (Set<Categoreis> categoreis) {
+        public PostResponseBuilder setCategory (Set<Categories> categoreis) {
             this.categoreis =  categoreis;
             return this;
         }
