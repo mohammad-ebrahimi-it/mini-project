@@ -5,8 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationListener;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,6 +43,11 @@ public class CustomerAuthenticationFilter extends UsernamePasswordAuthentication
         String password = request.getParameter("password");
         log.info("Username is: {}", username);
         log.info("Password is: {}", password);
+        if (username == null || password == null) {
+
+
+//            return (Authentication) this.objectMapper(request);
+        }
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
     }
