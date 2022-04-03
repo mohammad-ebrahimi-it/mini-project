@@ -19,6 +19,7 @@ public class Roles {
 
     private Long id;
     private String name;
+    private String persianName;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
