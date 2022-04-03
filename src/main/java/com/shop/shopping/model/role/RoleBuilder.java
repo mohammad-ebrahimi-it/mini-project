@@ -3,11 +3,12 @@ package com.shop.shopping.model.role;
 public class RoleBuilder {
     private Long id;
     private String name;
+    private String persianName;
 
     private RoleBuilder() {
     }
 
-    public static RoleBuilder aRole() {
+    public static RoleBuilder builder() {
         return new RoleBuilder();
     }
 
@@ -20,8 +21,13 @@ public class RoleBuilder {
         this.name = name;
         return this;
     }
+    public RoleBuilder setPersianName(String persianName) {
+        this.persianName = persianName;
+        return this;
+    }
+
 
     public Roles build() {
-        return new Roles(id, name);
+        return new Roles(id, name, persianName);
     }
 }
