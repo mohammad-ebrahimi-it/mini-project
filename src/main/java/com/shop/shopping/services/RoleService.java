@@ -25,20 +25,17 @@ public class RoleService implements RoleServiceInt {
     public Roles addRole(RoleRequest roleRequest) {
 
         Roles role = RoleBuilder.builder()
-                .setPersianName(roleRequest.getName().toLowerCase())
+                .setName(roleRequest.getName().toUpperCase())
                 .setPersianName(roleRequest.getPersianName())
                 .build();
         return roleRepository.save(role);
     }
 
     @Override
-    public RoleResponse getById(Long id) {
-        Roles role= roleRepository.findById(id).orElseThrow(
+    public Roles getById(Long id) {
+        return roleRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(
                         messageSourceAccessor.getMessage("role.not.found")));
-        return RoleResponse.RuleResponseBuilder.builder().
-                setId(role.getId()).setName(role.getName())
-                .build();
     }
 
     @Override
